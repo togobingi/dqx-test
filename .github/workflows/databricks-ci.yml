@@ -23,7 +23,7 @@ jobs:
           DATABRICKS_CLUSTER_ID: ${{ secrets.DATABRICKS_CLUSTER_ID }}
           DATABRICKS_WORKSPACE_ORG_ID: ${{ secrets.DATABRICKS_WORKSPACE_ORG_ID }}
         run: |
-          pytest functions/ --junitxml=unit-testresults.xml
+          pytest -v functions/ --junitxml=unit-testresults.xml
 
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
