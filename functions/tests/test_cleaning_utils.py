@@ -11,9 +11,13 @@ host_name = os.getenv('DATABRICKS_HOST')
 token = os.getenv('DATABRICKS_TOKEN')
 cluster_id = os.getenv('DATABRICKS_CLUSTER_ID')
 
-spark = DatabricksSession.builder.remote(
-   f"sc://{host_name}:443/;token={token};x-databricks-cluster-id={cluster_id}"
-).getOrCreate()
+# Start DB Conenct session with Serverless
+spark = DatabricksSession.builder.serverless(True).getOrCreate()
+
+# tart DB Conenct session with classic compute
+#spark = DatabricksSession.builder.remote(
+#   f"sc://{host_name}:443/;token={token};x-databricks-cluster-id={cluster_id}"
+#).getOrCreate()
 
 from ..cleaning_utils import *
 
