@@ -13,16 +13,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Configure Databricks Connect
-        run: |
-          echo "y
-          ${{ secrets.DATABRICKS_HOST }}
-          ${{ secrets.DATABRICKS_TOKEN }}
-          ${{ secrets.DATABRICKS_CLUSTER_ID }}
-          ${{ secrets.DATABRICKS_WORKSPACE_ORG_ID }}
-          15001" | databricks-connect configure
       - name: Run PyTest
-        run: pytest functions --junitxml=unit-testresults.xml
+        env: 
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_CLUSTER_ID: ${{ secrets.DATABRICKS_CLUSTER_ID }}
+          DATABRICKS_WORKSPACE_ORG_ID: ${{ secrets.DATABRICKS_WORKSPACE_ORG_ID }}
+        run: |
+          pytest functions --junitxml=unit-testresults.xml
 
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
