@@ -13,9 +13,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Uninstall py as it is not needed
-        run: pip uninstall py
-
       - name: Run PyTest
         env: 
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
