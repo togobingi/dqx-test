@@ -113,6 +113,7 @@ def test_add_metadata():
     output_df = add_metadata(df=test_df, field_dict=field_dict)
 
     output_df_as_pd = output_df.toPandas()
+    
 
     expected_output_df = pd.DataFrame({
         "id": [1, 2],
